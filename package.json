@@ -1,0 +1,35 @@
+{
+  "name": "maplibre-bindings",
+  "version": "0.2.5",
+  "description": "...",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "build-py": "esbuild src/index-py.js --bundle --minify --outfile=py-bindings/pymaplibre.js",
+    "build-py-dev": "esbuild src/index-py.js --bundle --outfile=py-bindings/pymaplibre.js",
+    "build-ipywidget": "esbuild src/ipywidget.js --bundle --minify --format=esm --outfile=py-bindings/pymaplibre.ipywidget.js",
+    "build-ipywidget-dev": "esbuild src/ipywidget.js --bundle --format=esm --outfile=py-bindings/pymaplibre.ipywidget.js",
+    "build-r": "esbuild src/index-r.js --bundle --minify --outfile=r-bindings/rmaplibre.js",
+    "build-r-dev": "esbuild src/index-r.js --bundle --outfile=r-bindings/rmaplibre.js",
+    "prettier": "prettier src --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Kuethe",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "0.19.10",
+    "prettier": "3.1.1"
+  },
+  "dependencies": {
+    "@deck.gl/aggregation-layers": "^9.0.16",
+    "@deck.gl/geo-layers": "^9.0.16",
+    "@deck.gl/json": "^9.0.16",
+    "@deck.gl/layers": "^9.0.16",
+    "@deck.gl/mapbox": "^9.0.16",
+    "mustache": "^4.2.0",
+    "pmtiles": "^3.0.6"
+  }
+}
