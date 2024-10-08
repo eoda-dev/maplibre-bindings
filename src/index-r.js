@@ -15,7 +15,7 @@ function mapLibreFactory(widgetElement, width, height) {
   }
 
   if (typeof Shiny !== "undefined") {
-    const messageHandlerName = `maplibre-${el.id}`;
+    const messageHandlerName = `maplibre-${widgetElement.id}`;
     console.log(messageHandlerName);
     Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }) => {
       console.log(id, calls);
