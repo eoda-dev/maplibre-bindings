@@ -1,7 +1,7 @@
 import PyMapLibreGL from "./pymaplibregl";
 const MapLibreWidget = PyMapLibreGL;
 
-function mapLibre4R(widgetElement, width, height) {
+function mapLibreFactory(widgetElement, width, height) {
   let map = null;
 
   function renderValue(widgetData) {
@@ -11,6 +11,15 @@ function mapLibre4R(widgetElement, width, height) {
     const map = mapLibreWidget.getMap();
     map.on("load", () => {
       mapLibreWidget.render(widgetData.calls);
+    });
+  }
+
+  if (typeof Shiny !== "undefined") {
+    const messageHandlerName = `maplibre-${el.id}`;
+    console.log(messageHandlerName);
+    Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }) => {
+      console.log(id, calls);
+      mapLibreWidget.render(calls);
     });
   }
 
@@ -24,5 +33,5 @@ function mapLibre4R(widgetElement, width, height) {
 HTMLWidgets.widget({
   name: "maplibre",
   type: "output",
-  factory: mapLibre4R,
+  factory: mapLibreFactory,
 });
