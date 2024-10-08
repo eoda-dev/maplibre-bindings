@@ -12,15 +12,15 @@ function mapLibreFactory(widgetElement, width, height) {
     map.on("load", () => {
       mapLibreWidget.render(widgetData.calls);
     });
-  }
 
-  if (typeof Shiny !== "undefined") {
-    const messageHandlerName = `maplibre-${widgetElement.id}`;
-    console.log(messageHandlerName);
-    Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }) => {
-      console.log(id, calls);
-      mapLibreWidget.render(calls);
-    });
+    if (typeof Shiny !== "undefined") {
+      const messageHandlerName = `maplibre-${widgetElement.id}`;
+      console.log(messageHandlerName);
+      Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }) => {
+        console.log(id, calls);
+        mapLibreWidget.render(calls);
+      });
+    }
   }
 
   function resize(width, height) {
