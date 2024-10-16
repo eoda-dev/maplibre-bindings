@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Maplibre GL JS Bindings for R and Python",
+    "section": "",
+    "text": "MapLibre GL JS bindings for R and Python\n\nRPython\n\n\nMapLibre for R provides R bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny, Quarto and Jupyter.\n\nlibrary(maplibre)\n\nmaplibre(map_options = mapOptions(center=c(-123.1256, 49.24658), zoom = 9))\n\n\n\n\n\n\n\nMapLibre for Python provides Python bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny for Python, Quarto and Jupyter.\n\nfrom maplibre import Map, MapOptions\n\nMap(MapOptions(center=(-123.1256, 49.24658), zoom=9))\n\n\n\n\nMy Awesome Map"
+  }
+]
