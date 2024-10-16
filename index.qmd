@@ -1,0 +1,36 @@
+---
+format: 
+  html:
+    toc: false
+---
+
+[MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js) bindings for R and Python
+
+
+::: {.panel-tabset group="language"}
+## R
+[MapLibre for R](https://github.com/eodaGmbH/r-maplibregl) provides R bindings for [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js).
+
+It integrates seamlessly into [Shiny](https://github.com/rstudio/shiny), [Quarto](https://quarto.org/) and [Jupyter](https://jupyter.org/).
+
+```{r}
+remotes::install_github("eodaGmbH/r-maplibregl")
+library(maplibre)
+
+maplibre(map_options = mapOptions(center=c(-123.1256, 49.24658), zoom = 9))
+```
+
+## Python
+
+
+[MapLibre for Python](https://github.com/eodaGmbH/py-maplibregl) provides Python bindings for [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js).
+
+It integrates seamlessly into [Shiny for Python](https://github.com/posit-dev/py-shiny), [Quarto](https://quarto.org/) and [Jupyter](https://jupyter.org/).
+
+```{python}
+from maplibre import Map, MapOptions
+
+Map(MapOptions(center=(-123.1256, 49.24658), zoom=9))
+
+```
+:::

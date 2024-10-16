@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+
+website:
+  title: "Maplibre GL JS Bindings for R and Python"
+  description: "Build interactive maps using R and Python"
+  open-graph: true
+  repo-url: https://github.com/eodaGmbH/maplibre-bindings
+  repo-actions: [edit, issue]
+  page-navigation: true
+  page-footer:
+    right:
+      - icon: github
+        href: https://github.com/eodaGmbH/maplibre-bindings
+        aria-label: Maplibre bindings site GitHub
+
+  navbar:
+    background: primary
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Home
+
+format:
+  html:
+    theme: [sandstone]
