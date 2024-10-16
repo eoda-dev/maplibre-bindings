@@ -1,0 +1,50 @@
+/* src/css/custom-layer-switcher-control.css */
+.layer-switcher-ctrl {
+  background-color: #ffffff;
+}
+.layer-switcher-ctrl a {
+  background-color: #ffffff;
+  _color: #404040;
+  color: darkgrey;
+  display: block;
+  margin: 0;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.layer-switcher-ctrl a:hover {
+  background-color: #f8f8f8;
+  color: #404040;
+}
+.layer-switcher-ctrl a.active {
+  background-color: #3887be;
+  color: #ffffff;
+}
+.layer-switcher-ctrl a.active:hover {
+  background: #3074a4;
+}
+.layer-switcher-ctrl-simple {
+  background-color: #ffffff;
+}
+.layer-switcher-ctrl-simple a {
+  background-color: #ffffff;
+  color: darkgrey;
+  display: block;
+  margin: 0;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.layer-switcher-ctrl-simple a:hover {
+  background-color: #f8f8f8;
+  color: #404040;
+}
+.layer-switcher-ctrl-simple a.active {
+  color: #404040;
+}
+.layer-switcher-ctrl-simple a.active:hover {
+  _background: #3074a4;
+  color: darkgrey;
+}
