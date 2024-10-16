@@ -1,0 +1,1 @@
+Sitemap: https://eodaGmbH.github.io/maplibre-bindings/sitemap.xml
