@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "Maplibre GL JS Bindings for R and Python",
     "section": "",
-    "text": "MapLibre GL JS bindings for R and Python\n\nRPython\n\n\nMapLibre for R provides R bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny, Quarto and Jupyter.\n\nlibrary(maplibre)\n\nmaplibre(map_options = mapOptions(center=c(-123.1256, 49.24658), zoom = 9))\n\n\n\n\n\n\n\nMapLibre for Python provides Python bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny for Python, Quarto and Jupyter.\n\nfrom maplibre import Map, MapOptions\n\nMap(MapOptions(center=(-123.1256, 49.24658), zoom=9))\n\n\n\n\nMy Awesome Map"
+    "text": "MapLibre GL JS bindings for R and Python\n\nRPython\n\n\nMapLibre for R provides R bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny, Quarto and Jupyter.\n\nremotes::install_github(\"eodaGmbH/r-maplibregl\")\n\nUsing GitHub PAT from the git credential store.\n\n\nSkipping install of 'maplibre' from a github remote, the SHA1 (7d9dd7d8) has not changed since last install.\n  Use `force = TRUE` to force installation\n\nlibrary(maplibre)\n\nmaplibre(map_options = mapOptions(center=c(-123.1256, 49.24658), zoom = 9))\n\n\n\n\n\n\n\nMapLibre for Python provides Python bindings for MapLibre GL JS.\nIt integrates seamlessly into Shiny for Python, Quarto and Jupyter.\n\nfrom maplibre import Map, MapOptions\n\nMap(MapOptions(center=(-123.1256, 49.24658), zoom=9))\n\n\n\n\nMy Awesome Map"
   }
 ]

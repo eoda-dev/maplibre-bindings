@@ -14,6 +14,7 @@ format:
 It integrates seamlessly into [Shiny](https://github.com/rstudio/shiny), [Quarto](https://quarto.org/) and [Jupyter](https://jupyter.org/).
 
 ```{r}
+remotes::install_github("eodaGmbH/r-maplibregl")
 library(maplibre)
 
 maplibre(map_options = mapOptions(center=c(-123.1256, 49.24658), zoom = 9))
