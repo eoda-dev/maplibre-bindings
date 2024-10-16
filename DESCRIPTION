@@ -1,0 +1,12 @@
+Package: maplibre.eoda.tech
+Title: Maplibre GL JS Bindings
+Version: 0.1
+Authors@R: c(
+    person("Nico", "Friess", email = "nico.friess@eoda.de", role = c("aut", "cre", "cph")),
+    person("Stefan", "Kuethe", email = "stefan.kuethe@eoda.de", role = c("aut", "cph")),
+    person(given = "Maplibre contributors", role = "cph", comment = "This package offers R bindings to the Maplibre GL JS library.")
+  )
+Maintainer: Nico Friess <nico.friess@eoda.de>
+Description: Provides bindings for 'MapLibre GL JS'.
+Remotes:
+    eodaGmbH/r-maplibre
