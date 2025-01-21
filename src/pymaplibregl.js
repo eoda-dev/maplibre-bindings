@@ -172,13 +172,18 @@ export default class PyMapLibreGL {
     this._map.addControl(draw, position);
     if (geojson) draw.add(geojson);
 
-    // Add event listener
+    // Add event listeners
     if (typeof Shiny !== "undefined") {
       this._map.on("draw.selectionchange", (e) => {
         const inputName = `${this._id}_draw_features_selected`;
         const object = { features: e.features, random: Math.random() };
         console.log(inputName, object);
         Shiny.onInputChange(inputName, object);
+      });
+
+      this._map.on("draw.create", (e) => {
+        const inputName = `${this._id}_draw_features_created`;
+        Shiny.onInputChange(inputName, { features: e.features });
       });
     }
   }
