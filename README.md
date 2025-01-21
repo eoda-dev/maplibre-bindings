@@ -12,6 +12,9 @@ npm run prettier
 npm run build-py
 npm run build-py-dev
 
+# Typescript
+npm run build-py-dev-ts
+
 # Python Ipywidget Bindings
 npm run build-ipywidget
 npm run build-ipywidget-dev
