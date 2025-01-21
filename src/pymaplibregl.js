@@ -185,6 +185,16 @@ export default class PyMapLibreGL {
         const inputName = `${this._id}_draw_features_created`;
         Shiny.onInputChange(inputName, { features: e.features });
       });
+
+      this._map.on("draw.delete", (e) => {
+        const inputName = `${this._id}_draw_features_deleted`;
+        Shiny.onInputChange(inputName, { features: e.features });
+      });
+
+      this._map.on("draw.update", (e) => {
+        const inputName = `${this._id}_draw_features_updated`;
+        Shiny.onInputChange(inputName, { features: e.features });
+      });
     }
   }
 
