@@ -20,7 +20,8 @@ const mapData = {
         antialias: true,
     },
     calls: [
-        ["flyTo", [{ "center": [-87.61694, 41.7] }]]
+        ["flyTo", [{ "center": [-87.61694, 41.7] }]],
+        ["addControl", ["InfoBoxControl", { content: "Hi there!", cssText: "background: yellow; padding: 20px; color: blue;" }, "top-left"]]
     ]
 };
 

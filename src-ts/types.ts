@@ -21,3 +21,9 @@ type Popup = {
   text: string;
   options: object;
 };
+
+// Custom controls
+type InfoBoxControlOptions = {
+  cssText: string;
+  content: string;
+}

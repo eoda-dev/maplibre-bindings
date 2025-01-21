@@ -1736,6 +1736,33 @@
     }
   });
 
+  // built/custom-controls/info-box.js
+  var require_info_box = __commonJS({
+    "built/custom-controls/info-box.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var InfoBoxControl = class {
+        constructor(options) {
+          this._container = null;
+          this._options = options || {};
+        }
+        onAdd(map) {
+          this._map = map;
+          this._container = document.createElement("div");
+          this._container.className = "maplibregl-ctrl maplibregl-ctrl-group";
+          this._container.style.cssText = this._options.cssText || "padding: 10px;";
+          this._container.innerHTML = this._options.content || "We out here.";
+          return this._container;
+        }
+        onRemove() {
+          this._container.parentNode.removeChild(this._container);
+          this._map = void 0;
+        }
+      };
+      exports.default = InfoBoxControl;
+    }
+  });
+
   // node_modules/mustache/mustache.js
   var require_mustache = __commonJS({
     "node_modules/mustache/mustache.js"(exports, module) {
@@ -2274,10 +2301,15 @@
   var require_pywidget = __commonJS({
     "built/pywidget.js"(exports) {
       "use strict";
+      var __importDefault = exports && exports.__importDefault || function(mod) {
+        return mod && mod.__esModule ? mod : { "default": mod };
+      };
       Object.defineProperty(exports, "__esModule", { value: true });
       var pmtiles_1 = require_dist();
       var protocol = new pmtiles_1.Protocol();
       maplibregl.addProtocol("pmtiles", protocol.tile);
+      var info_box_1 = __importDefault(require_info_box());
+      maplibregl.InfoBoxControl = info_box_1.default;
       var utils_1 = require_utils();
       function getJSONConverter() {
         if (typeof deck === "undefined") {
