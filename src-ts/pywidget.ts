@@ -33,7 +33,7 @@ if (typeof MapboxDraw !== "undefined") {
 }
 
 // TODO: Rename to 'MapLibreWidget'
-export default class PyMapLibreGL {
+export default class MapWidget {
   _id: string;
   _map: any;
   _JSONConverter: any;
@@ -51,13 +51,7 @@ export default class PyMapLibreGL {
       this._map.getCanvas().style.cursor = "";
     });
 
-    // TODO: Do not add by default
-    // this._map.addControl(new maplibregl.NavigationControl());
-
     this._JSONConverter = getJSONConverter();
-
-    // Just a test
-    // if (typeof MapboxDraw !== "undefined") this.addMapboxDraw();
   }
 
   getMap() {

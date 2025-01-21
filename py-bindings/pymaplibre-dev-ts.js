@@ -2291,7 +2291,7 @@
         MapboxDraw.constants.classes.CONTROL_PREFIX = "maplibregl-ctrl-";
         MapboxDraw.constants.classes.CONTROL_GROUP = "maplibregl-ctrl-group";
       }
-      var PyMapLibreGL = class {
+      var MapWidget = class {
         constructor(mapOptions) {
           this._id = mapOptions.container;
           this._map = new maplibregl.Map(mapOptions);
@@ -2446,7 +2446,7 @@
           });
         }
       };
-      exports.default = PyMapLibreGL;
+      exports.default = MapWidget;
     }
   });
 
@@ -2465,10 +2465,10 @@
         window.pymaplibregl = function({ mapOptions, calls }) {
           const id = "pymaplibregl";
           const container = document.getElementById(id);
-          const pyMapLibreGL = new pywidget_1.default(Object.assign({ container: container === null || container === void 0 ? void 0 : container.id }, mapOptions));
-          const map = pyMapLibreGL.getMap();
+          const mapWidget = new pywidget_1.default(Object.assign({ container: container === null || container === void 0 ? void 0 : container.id }, mapOptions));
+          const map = mapWidget.getMap();
           map.on("load", () => {
-            pyMapLibreGL.render(calls);
+            mapWidget.render(calls);
           });
         };
       }

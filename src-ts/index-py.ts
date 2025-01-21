@@ -1,4 +1,4 @@
-import PyMapLibreGL from "./pywidget";
+import MapWidget from "./pywidget";
 import { getViewState } from "./utils";
 
 const version = "0.2.7";
@@ -9,12 +9,12 @@ if (typeof Shiny === "undefined") {
         // TODO: make id a parameter
         const id = "pymaplibregl";
         const container = document.getElementById(id);
-        const pyMapLibreGL = new PyMapLibreGL(
+        const mapWidget = new MapWidget(
             Object.assign({ container: container?.id }, mapOptions),
         );
-        const map = pyMapLibreGL.getMap();
+        const map = mapWidget.getMap();
         map.on("load", () => {
-            pyMapLibreGL.render(calls);
+            mapWidget.render(calls);
         });
     };
 }
@@ -27,7 +27,7 @@ if (typeof Shiny !== "undefined") {
 
         renderValue(el: HTMLElement, payload: Payload) {
             console.log("id:", el.id, "payload:", payload);
-            const pyMapLibreGL = ((window as any)._maplibreWidget = new PyMapLibreGL(
+            const pyMapLibreGL = ((window as any)._maplibreWidget = new MapWidget(
                 Object.assign({ container: el.id }, payload.mapData.mapOptions),
             ));
 
