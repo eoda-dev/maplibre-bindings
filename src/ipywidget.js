@@ -36,15 +36,7 @@ function updateModel(model, map) {
 
 function createMap(mapOptions, model) {
   const map = new maplibregl.Map(mapOptions);
-  /*
-  if (mapOptions.navigationControl === undefined) {
-    mapOptions.navigationControl = true;
-  }
 
-  if (mapOptions.navigationControl) {
-    map.addControl(new maplibregl.NavigationControl());
-  }
-  */
   map.on("mouseover", () => {
     map.getCanvas().style.cursor = "pointer";
   });
@@ -99,16 +91,18 @@ function render({ model, el }) {
   // Add event listeners for MapboxDraw
   // TODO: Only add listeners if 'addMapboxDraw is called'
   const drawEvents = [
-    "draw.create",
-    "draw.update",
-    "draw.delete",
-    "draw.render",
+    { name: "draw.create", destVar: "draw_features_created" },
+    { name: "draw.update", destVar: "draw_features_updated" },
+    { name: "draw.delete", destVar: "draw_features_deleted" },
+    //"draw.render",
   ];
-  for (let i in drawEvents) {
-    map.on(drawEvents[i], (e) => {
+  for (let drawEvent of drawEvents) {
+    map.on(drawEvent.name, (e) => {
       const draw = customMapMethods.getMapboxDraw();
-      console.log("features", draw.getAll());
+      console.log("all features", draw.getAll());
       model.set("draw_feature_collection_all", draw.getAll());
+      console.log("event features", e.features);
+      model.set(drawEvent.destVar, e.features);
       model.save_changes();
     });
   }
