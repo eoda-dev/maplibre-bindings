@@ -2511,10 +2511,10 @@
           }
           renderValue(el, payload) {
             console.log("id:", el.id, "payload:", payload);
-            const pyMapLibreGL = window._maplibreWidget = new pywidget_1.default(Object.assign({ container: el.id }, payload.mapData.mapOptions));
-            const map = pyMapLibreGL.getMap();
+            const mapWidget = window._maplibreWidget = new pywidget_1.default(Object.assign({ container: el.id }, payload.mapData.mapOptions));
+            const map = mapWidget.getMap();
             map.on("load", () => {
-              pyMapLibreGL.render(payload.mapData.calls);
+              mapWidget.render(payload.mapData.calls);
             });
             map.on("click", (e) => {
               const inputName = `${el.id}_clicked`;
@@ -2531,7 +2531,7 @@
             console.log(messageHandlerName);
             Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }) => {
               console.log(id, calls);
-              pyMapLibreGL.render(calls);
+              mapWidget.render(calls);
             });
           }
         }

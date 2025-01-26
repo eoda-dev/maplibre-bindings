@@ -27,13 +27,13 @@ if (typeof Shiny !== "undefined") {
 
         renderValue(el: HTMLElement, payload: Payload) {
             console.log("id:", el.id, "payload:", payload);
-            const pyMapLibreGL = ((window as any)._maplibreWidget = new MapWidget(
+            const mapWidget = ((window as any)._maplibreWidget = new MapWidget(
                 Object.assign({ container: el.id }, payload.mapData.mapOptions),
             ));
 
-            const map = pyMapLibreGL.getMap();
+            const map = mapWidget.getMap();
             map.on("load", () => {
-                pyMapLibreGL.render(payload.mapData.calls);
+                mapWidget.render(payload.mapData.calls);
             });
 
             // Add event listeners, TODO: Move to separate file 
@@ -55,7 +55,7 @@ if (typeof Shiny !== "undefined") {
             console.log(messageHandlerName);
             Shiny.addCustomMessageHandler(messageHandlerName, ({ id, calls }: { id: string, calls: [string, any][] }) => {
                 console.log(id, calls);
-                pyMapLibreGL.render(calls);
+                mapWidget.render(calls);
             });
         }
     }
