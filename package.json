@@ -14,22 +14,25 @@
     "build-ipywidget-dev": "esbuild src/ipywidget.js --bundle --format=esm --outfile=py-bindings/pymaplibre.ipywidget.js",
     "build-r": "esbuild src/index-r.js --bundle --minify --outfile=r-bindings/rmaplibre.js",
     "build-r-dev": "esbuild src/index-r.js --bundle --outfile=r-bindings/rmaplibre.js",
+    "build-py-dev-ts": "tsc --build && esbuild built/index-py.js --bundle --outfile=py-bindings/pymaplibre-dev-ts.js",
     "prettier": "prettier src --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Stefan Kuethe",
   "license": "MIT",
   "devDependencies": {
+    "@types/mustache": "^4.2.5",
     "esbuild": "0.19.10",
-    "prettier": "3.1.1"
+    "prettier": "3.1.1",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@deck.gl/aggregation-layers": "^9.0.16",
-    "@deck.gl/geo-layers": "^9.0.16",
-    "@deck.gl/json": "^9.0.16",
-    "@deck.gl/layers": "^9.0.16",
-    "@deck.gl/mapbox": "^9.0.16",
+    "@deck.gl/aggregation-layers": "^9.1.0",
+    "@deck.gl/geo-layers": "^9.1.0",
+    "@deck.gl/json": "^9.1.0",
+    "@deck.gl/layers": "^9.1.0",
+    "@deck.gl/mapbox": "^9.1.0",
     "mustache": "^4.2.0",
-    "pmtiles": "^3.0.6"
+    "pmtiles": "^3.2.1"
   }
 }
