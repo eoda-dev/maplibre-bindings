@@ -27,12 +27,12 @@ maplibregl.InfoBoxControl = InfoBoxControl;
 
 import { applyMapMethod, getCustomMapMethods } from "./map-methods";
 
-function createContainer(model: AnyModel) {
-  const id = "pymaplibregl";
-  const container = document.createElement("div");
-  container.id = id;
-  container.style.height = model.get("height");
-  return container;
+function createMapElement(model: AnyModel): HTMLElement {
+  const height = model.get("height") || "400px";
+  const mapElement = document.createElement("div");
+  mapElement.id = "maplibre-anywidget";
+  mapElement.style.height = height;
+  return mapElement;
 }
 
 function updateModel(model: AnyModel, map: maplibregl.Map): void {
@@ -89,16 +89,22 @@ function createMap(
   return map;
 }
 
-function render({ model, el }: { model: AnyModel; el: HTMLElement }) {
-  console.log("anywidget", "render");
+function render({ model, el }: { model: AnyModel; el: HTMLElement }): void {
+  // --- Main
+  console.log("Welcome to maplibre-anywidget", el);
 
-  const container = createContainer(model);
+  const mapElement = createMapElement(model);
+  const mapOptions = model.get("map_options") as maplibregl.MapOptions;
+  mapOptions.container = mapElement;
+  /*
   const mapOptions = Object.assign(
-    { container: container },
+    { container: mapElement },
     model.get("map_options"),
   );
+  */
+
   console.log(mapOptions);
-  const map = createMap(mapOptions, model);
+  const map = (window as any).anywidgetMapLibreMap = createMap(mapOptions, model);
 
   // As a  Workaround we need to pass maplibregl module to customMapMethods
   // to avoid duplicated imports (current bug in esbuild)
@@ -153,7 +159,7 @@ function render({ model, el }: { model: AnyModel; el: HTMLElement }) {
     apply(msg.calls);
   });
 
-  el.appendChild(container);
+  el.appendChild(mapElement);
 }
 
 export default { render };

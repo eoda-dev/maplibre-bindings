@@ -18,7 +18,7 @@
     "build-py-ts": "tsc --build && cp -r src-ts/css built && esbuild built/index-py.js --bundle --minify --outfile=py-bindings/pymaplibre.js",
     "prettier": "prettier src --write",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-ipywidget-ts": "tsc --build && cp -r src-ts/css built && esbuild built/anywidget/ipywidget.js --bundle --minify --format=esm --outfile=py-bindings/pymaplibre.ipywidget.js"
+    "build-anywidget-ts": "tsc --build && cp -r src-ts/css built && esbuild built/anywidget/ipywidget.js --bundle --minify --format=esm --outfile=py-bindings/maplibre.anywidget.js"
   },
   "author": "Stefan Kuethe",
   "license": "MIT",
