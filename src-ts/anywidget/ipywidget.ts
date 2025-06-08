@@ -162,4 +162,10 @@ function render({ model, el }: { model: AnyModel; el: HTMLElement }): void {
   el.appendChild(mapElement);
 }
 
+// --- Standalone
+(window as any).renderMapLibreWidget = (mapOptions: maplibregl.MapOptions): void => {
+  console.log(mapOptions);
+};
+// ---
+
 export default { render };
