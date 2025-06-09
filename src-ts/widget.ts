@@ -38,8 +38,8 @@ function render({ model, el }: { model: AnyModel; el: HTMLElement }): void {
     map.on("load", () => {
         console.log("map loaded");
         map.resize();
-        //model.set("load", true);
-        //model.save_changes();
+        model.set("load", true);
+        model.save_changes();
 
         for (let call of getCalls()) {
             console.log("init call", call);
@@ -47,8 +47,8 @@ function render({ model, el }: { model: AnyModel; el: HTMLElement }): void {
             mapWidget.executeCall(method_name, args);
         }
 
-        model.set("load", true);
-        model.save_changes();
+        // model.set("load", true);
+        // model.save_changes();
 
     });
 

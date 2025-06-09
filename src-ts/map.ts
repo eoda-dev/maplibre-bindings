@@ -5,6 +5,8 @@ import { GeocodingControl } from "@maptiler/geocoding-control/maplibregl";
 import mustache from "mustache";
 import { Protocol, PMTiles } from "pmtiles";
 
+import { jsonConverter, MapboxOverlay } from "./deck.gl";
+
 // css
 import "@maptiler/geocoding-control/style.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -19,6 +21,7 @@ const customMethods = [
     "addControl",
     "addImage",
     "addTooltip",
+    "addMapboxOverlay",
     "setCenterFromPMTiles"
 ];
 
@@ -32,6 +35,7 @@ function createPopupDescription(feature: maplibregl.MapGeoJSONFeature, template?
 
 export default class MapWidget {
     _map: maplibregl.Map;
+    _mapboxOverlay: MapboxOverlay | undefined;
     _model: AnyModel | undefined;
 
     constructor(mapElement: HTMLElement, mapOptions: maplibregl.MapOptions, model?: AnyModel) {
@@ -98,6 +102,21 @@ export default class MapWidget {
         this._map.on("mouseleave", layerId, () => {
             popup.remove();
         });
+    }
+
+    addMapboxOverlay(layerDefs: any[]): void {
+        const layers = layerDefs.map((json) => jsonConverter.convert(json));
+        if (this._mapboxOverlay) {
+            console.log("Update layers");
+            this._mapboxOverlay.setProps({ layers: layers });
+            return
+        }
+
+        this._mapboxOverlay = new MapboxOverlay({
+            interleaved: true,
+            layers: layers
+        });
+        this._map.addControl(this._mapboxOverlay);
     }
 
     setCenterFromPMTiles(url: string): void {
