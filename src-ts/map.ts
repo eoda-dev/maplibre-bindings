@@ -3,10 +3,14 @@ import type { AnyModel } from "@anywidget/types";
 import maplibregl from "maplibre-gl";
 import { GeocodingControl } from "@maptiler/geocoding-control/maplibregl";
 import mustache from "mustache";
+import { Protocol, PMTiles } from "pmtiles";
 
 // css
 import "@maptiler/geocoding-control/style.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+
+const protocol = new Protocol();
+maplibregl.addProtocol("pmtiles", protocol.tile);
 
 // @ts-expect-error
 maplibregl.MapTilerGeocodingControl = GeocodingControl;
@@ -14,7 +18,8 @@ maplibregl.MapTilerGeocodingControl = GeocodingControl;
 const customMethods = [
     "addControl",
     "addImage",
-    "addTooltip"
+    "addTooltip",
+    "setCenterFromPMTiles"
 ];
 
 function createPopupDescription(feature: maplibregl.MapGeoJSONFeature, template?: string): string {
@@ -92,6 +97,14 @@ export default class MapWidget {
 
         this._map.on("mouseleave", layerId, () => {
             popup.remove();
+        });
+    }
+
+    setCenterFromPMTiles(url: string): void {
+        const p = new PMTiles(url);
+        p.getHeader().then(h => {
+            this._map.setCenter([h.centerLon, h.centerLat]);
+            this._map.setZoom(h.maxZoom - 2);
         });
     }
 }
