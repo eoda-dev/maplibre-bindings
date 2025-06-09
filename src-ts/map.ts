@@ -2,6 +2,7 @@ import type { AnyModel } from "@anywidget/types";
 
 import maplibregl from "maplibre-gl";
 import { GeocodingControl } from "@maptiler/geocoding-control/maplibregl";
+import mustache from "mustache";
 
 // css
 import "@maptiler/geocoding-control/style.css";
@@ -15,6 +16,14 @@ const customMethods = [
     "addImage",
     "addTooltip"
 ];
+
+function createPopupDescription(feature: maplibregl.MapGeoJSONFeature, template?: string): string {
+    const properties = feature.properties;
+    if (template)
+        return mustache.render(template, properties);
+
+    return Object.keys(properties).map((key) => `${key}: ${properties[key]}`).join("</br>");
+}
 
 export default class MapWidget {
     _map: maplibregl.Map;
@@ -71,7 +80,18 @@ export default class MapWidget {
         this._map.addImage(id, image.data, options);
     }
 
-    addTooltip(): void {
-        console.log("addTooltip NOT IMPLEMENTED YET");
+    addTooltip(layerId: string, template?: string): void {
+        const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
+
+        this._map.on("mousemove", layerId, (e) => {
+            // @ts-expect-error
+            const feature = e.features[0];
+            const description = createPopupDescription(feature, template);
+            popup.setLngLat(e.lngLat).setHTML(description).addTo(this._map);
+        });
+
+        this._map.on("mouseleave", layerId, () => {
+            popup.remove();
+        });
     }
 }
