@@ -22,7 +22,8 @@ const customMethods = [
     "addImage",
     "addTooltip",
     "addMapboxOverlay",
-    "setCenterFromPMTiles"
+    "setCenterFromPMTiles",
+    "fitBoundsFromPMTiles"
 ];
 
 function createPopupDescription(feature: maplibregl.MapGeoJSONFeature, template?: string): string {
@@ -106,12 +107,13 @@ export default class MapWidget {
 
     addMapboxOverlay(layerDefs: any[]): void {
         const layers = layerDefs.map((json) => jsonConverter.convert(json));
-        if (this._mapboxOverlay) {
+        if (this._mapboxOverlay !== undefined) {
             console.log("Update layers");
             this._mapboxOverlay.setProps({ layers: layers });
             return
         }
 
+        console.log("Create MapboxOverlay");
         this._mapboxOverlay = new MapboxOverlay({
             interleaved: true,
             layers: layers
@@ -119,11 +121,29 @@ export default class MapWidget {
         this._map.addControl(this._mapboxOverlay);
     }
 
-    setCenterFromPMTiles(url: string): void {
+    setCenterFromPMTilesOld(url: string): void {
         const p = new PMTiles(url);
         p.getHeader().then(h => {
-            this._map.setCenter([h.centerLon, h.centerLat]);
             this._map.setZoom(h.maxZoom - 2);
+            this._map.setCenter([h.centerLon, h.centerLat]);
         });
+    }
+
+    async setCenterFromPMTiles(url: string, zoomOffset: number = 2): Promise<void> {
+        const p = new PMTiles(url);
+        const h = await p.getHeader();
+        this._map.setZoom(h.maxZoom - zoomOffset);
+        this._map.setCenter([h.centerLon, h.centerLat]);
+    }
+
+    fitBoundsFromPMTiles(url: string): void {
+        const p = new PMTiles(url);
+        p.getHeader().then((h) => {
+            const bounds = [h.minLon, h.minLat, h.maxLon, h.maxLat] as maplibregl.LngLatBoundsLike;
+            // console.log(bounds);
+            this._map.fitBounds(bounds);
+        });
+
+        // p.getMetadata().then((md) => console.log(md));
     }
 }
