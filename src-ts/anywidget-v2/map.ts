@@ -5,7 +5,8 @@ import { GeocodingControl } from "@maptiler/geocoding-control/maplibregl";
 import mustache from "mustache";
 import { Protocol, PMTiles } from "pmtiles";
 
-import { jsonConverter, MapboxOverlay } from "./deck.gl";
+import { jsonConverter, MapboxOverlay } from "../deck.gl";
+import MapboxDraw from "../anywidget/mapbox-draw-plugin";
 
 // css
 import "@maptiler/geocoding-control/style.css";
@@ -80,6 +81,14 @@ export default class MapWidget {
         options: any,
         position: maplibregl.ControlPosition,
     ): void {
+        if (type === "MapboxDraw") {
+            console.log("Add MapnoxDraw");
+
+            // @ts-expect-error
+            this._map.addControl(new MapboxDraw(options), position);
+            return;
+        }
+
         // @ts-expect-error
         this._map.addControl(new maplibregl[type](options), position);
     }

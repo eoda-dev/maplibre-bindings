@@ -19,7 +19,7 @@
     "prettier": "prettier src --write",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-anywidget-ts": "tsc --build && cp -r src-ts/css built && esbuild built/anywidget/ipywidget.js --bundle --minify --format=esm --outfile=py-bindings/maplibre.anywidget.js",
-    "build-anywidget-ts4": "tsc --build && cp -r src-ts/css built && esbuild built/widget.js --bundle --minify --format=esm --outfile=py-bindings/maplibre.anywidget.js"
+    "build-anywidget-ts4": "tsc --build && cp -r src-ts/css built && esbuild built/anywidget-v2/widget.js --bundle --minify --format=esm --outfile=py-bindings/maplibre.anywidget.js"
   },
   "author": "Stefan Kuethe",
   "license": "MIT",
