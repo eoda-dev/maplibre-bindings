@@ -1,6 +1,24 @@
+import maplibregl from "maplibre-gl";
 import { Protocol } from "pmtiles";
+import rtlPluginSource from "./rtl-plugin-source";
+
+// Expose maplibregl globally for compatibility
+window.maplibregl = maplibregl;
+
 let protocol = new Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
+
+// Initialize RTL text plugin for Arabic/Hebrew support (bundled for offline usage)
+try {
+  const rtlPluginBlob = new Blob([rtlPluginSource], { type: 'application/javascript' });
+  const rtlPluginUrl = URL.createObjectURL(rtlPluginBlob);
+  maplibregl.setRTLTextPlugin(rtlPluginUrl, true);
+} catch (e) {
+  // Plugin might already be set, which is fine
+  if (!e.message.includes('already been set')) {
+    console.warn('Failed to initialize RTL text plugin:', e.message);
+  }
+}
 
 // Add custom controls
 import InfoBoxControl from "./custom-controls/info-box";

@@ -1,6 +1,19 @@
 // import maplibregl from "https://esm.sh/maplibre-gl@5.3.0";
 import maplibregl from "maplibre-gl";
 import { Protocol } from "https://esm.sh/pmtiles@3.0.6";
+import rtlPluginSource from "./rtl-plugin-source";
+
+// Initialize RTL text plugin for Arabic/Hebrew support (bundled for offline usage)
+try {
+  const rtlPluginBlob = new Blob([rtlPluginSource], { type: 'application/javascript' });
+  const rtlPluginUrl = URL.createObjectURL(rtlPluginBlob);
+  maplibregl.setRTLTextPlugin(rtlPluginUrl, true);
+} catch (e) {
+  // Plugin might already be set, which is fine
+  if (!e.message?.includes('already been set')) {
+    console.warn('RTL text plugin:', e.message);
+  }
+}
 
 // import "./css/maplibre-gl.css";
 import "@maptiler/geocoding-control/style.css";
